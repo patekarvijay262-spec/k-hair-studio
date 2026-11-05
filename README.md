@@ -30,3 +30,7 @@ The WhatsApp number also appears as `tel:` links in `site/index.html`. Update th
 
 - Booking and feedback open WhatsApp with the message written out, and the customer presses send.
 - Only entry prices are public. Keep other prices out of these files, because anyone can read a website's source.
+
+## Preview lock
+
+The site currently shows a password screen and asks search engines not to list it. This is for reviewing only and is not real security. Before launch, delete `site/assets/gate.js`, its script tag, and the `noindex` line in `site/index.html`.
