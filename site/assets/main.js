@@ -136,7 +136,6 @@ const setErr = (form, key, msg) => { $(`[data-err="${key}"]`, form).textContent 
 // Booking
 const book = $('#bookForm');
 $('#bFor').innerHTML = ['Women', 'Men', 'Child'].map((w, i) => chip('radio', 'for', w, w, '', i === 0)).join('');
-$('#bFirst').innerHTML = chip('radio', 'first', 'yes', 'Yes, it\'s my first visit', '', true) + chip('radio', 'first', 'no', 'I\'ve been before');
 
 const drawServices = () => {
   const who = picked(book, 'for')[0];
@@ -179,7 +178,6 @@ const drawTicket = () => {
   fill('name', $('#bName').value.trim(), 'Your name');
   fill('service', services.join(', '), 'Pick from the list');
   fill('when', day && time ? `${day} at ${time}` : day || time, 'Pick a day and time');
-  fill('offer', picked(book, 'first')[0] === 'yes' ? 'First-visit discount applied' : '', 'Regular visit');
 };
 book.addEventListener('change', drawTicket);
 book.addEventListener('input', drawTicket);
@@ -199,7 +197,6 @@ book.addEventListener('submit', e => {
     $('.err:not(:empty)', book).scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
-  const first = picked(book, 'first')[0] === 'yes';
   const note = $('#bNote').value.trim();
   const text = [
     'New booking from the K Hair website',
@@ -208,7 +205,6 @@ book.addEventListener('submit', e => {
     `For: ${picked(book, 'for')[0]}`,
     `Service: ${services.join(', ')}`,
     `When: ${day} at ${time}`,
-    `First visit: ${first ? 'Yes (website offer: 15% off on ₹1,000+, 10% below)' : 'No'}`,
     note ? `Note: ${note}` : '',
   ].filter((l, i) => l || i === 1).join('\n');
   const url = waLink(text);
